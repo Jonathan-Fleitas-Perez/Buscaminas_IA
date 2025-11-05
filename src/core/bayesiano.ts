@@ -62,7 +62,7 @@ export class RedBayesiana {
     const nodosLista = Array.from(nodosRelevantes);
 
     if (nodosLista.length > 12) {
-      return this.calcularProbabilidadAproximada(nodoObjetivo, vecinosInformativos);
+      return this.calcularProbabilidadAproximada(vecinosInformativos);
     }
 
     let configuracionesValidas = 0;
@@ -110,7 +110,7 @@ export class RedBayesiana {
     return true;
   }
 
-  private calcularProbabilidadAproximada(nodoObjetivo: NodoGrafo, vecinosInformativos: NodoGrafo[]): number {
+  private calcularProbabilidadAproximada(vecinosInformativos: NodoGrafo[]): number {
     const probabilidades: number[] = [];
     const pesos: number[] = [];
 
