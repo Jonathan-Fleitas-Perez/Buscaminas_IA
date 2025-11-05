@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Brain } from "lucide-react";
@@ -20,6 +21,7 @@ function App() {
     estaAutoResolviendo,
   } = useJuego();
 
+ 
   const [mostrarProbabilidades, setMostrarProbabilidades] = useState(false);
 
   const handleNuevoJuego = (nivel: NivelJuego) => {
@@ -35,6 +37,8 @@ function App() {
   };
 
   const stats = controlador.motor?.obtenerEstadisticas() || null;
+  const mapaProbabilidades =
+    controlador.motor?.obtenerMapaProbabilidades() || new Map();
 
   return (
     <div className="min-h-screen bg-linear-to-b from-[#0b0b0c] via-[#121213] to-[#0d0d0e] p-4 md:p-8 text-gray-200">
@@ -95,6 +99,8 @@ function App() {
               />
             </motion.div>
 
+        
+
             {/* Tablero */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -112,9 +118,7 @@ function App() {
                     <input
                       type="checkbox"
                       checked={mostrarProbabilidades}
-                      onChange={(e) =>
-                        setMostrarProbabilidades(e.target.checked)
-                      }
+                      onChange={(e) => setMostrarProbabilidades(e.target.checked)}
                       className="w-4 h-4 rounded border-gray-600 bg-[#1b1b1d] checked:bg-gray-500"
                     />
                     <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">
@@ -149,37 +153,23 @@ function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-400">
               <div>
-                <h4 className="font-semibold text-gray-300">
-                  1. Lógica Determinista
-                </h4>
-                <p>
-                  Usa reglas con certeza total: si todas las minas están
-                  marcadas, las demás son seguras.
-                </p>
+                <h4 className="font-semibold text-gray-300">1. Lógica Determinista</h4>
+                <p>Usa reglas con certeza total: si todas las minas están marcadas, las demás son seguras.</p>
               </div>
 
               <div>
                 <h4 className="font-semibold text-gray-300">2. Patrones</h4>
-                <p>
-                  Detecta estructuras conocidas como 1-2-1 o subconjuntos que
-                  revelan minas seguras.
-                </p>
+                <p>Detecta estructuras conocidas como 1-2-1 o subconjuntos que revelan minas seguras.</p>
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-300">
-                  3. Red Bayesiana
-                </h4>
-                <p>
-                  Evalúa configuraciones probabilísticas cuando no hay certezas
-                  lógicas.
-                </p>
+                <h4 className="font-semibold text-gray-300">3. Red Bayesiana</h4>
+                <p>Evalúa configuraciones probabilísticas cuando no hay certezas lógicas.</p>
               </div>
             </div>
 
             <div className="mt-6 p-4 bg-[#101011]/70 rounded-lg border border-gray-800 text-gray-400 text-xs text-center">
-              Estrategia multinivel: primero lógica, luego patrones, finalmente
-              análisis probabilístico.
+              💡 Estrategia multinivel: primero lógica, luego patrones, finalmente análisis probabilístico.
             </div>
           </Card>
         </motion.footer>
